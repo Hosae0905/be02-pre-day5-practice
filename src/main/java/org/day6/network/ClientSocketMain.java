@@ -1,4 +1,4 @@
-package org.day6;
+package org.day6.network;
 
 import java.io.IOException;
 import java.io.InputStream;

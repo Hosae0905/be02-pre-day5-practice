@@ -1,4 +1,4 @@
-package org.day6;
+package org.day6.streamClient;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,8 +11,8 @@ public class ChattingClient {
 
         // 보내는 코드
         OutputStream os = cs.getOutputStream();
-        OutputStreamWriter output = new OutputStreamWriter(os);
-        BufferedWriter bw = new BufferedWriter(output);
+        OutputStreamWriter osw = new OutputStreamWriter(os);
+        BufferedWriter bw = new BufferedWriter(osw);
 
         Scanner sc = new Scanner(System.in);
         System.out.print("원하시는 파일의 이름을 입력해주세요. : ");
@@ -28,7 +28,7 @@ public class ChattingClient {
         String data = bir.readLine();
         System.out.println(data);
 
-        FileInputStream fileInputStream = new FileInputStream("C:\\test2\\" + data);
-        fileInputStream.close();
+        FileInputStream fis = new FileInputStream("C:\\test2\\" + data);
+        fis.close();
     }
 }

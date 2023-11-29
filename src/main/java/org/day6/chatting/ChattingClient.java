@@ -1,13 +1,13 @@
-package org.day6;
+package org.day6.chatting;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class FileClient {
+public class ChattingClient {
     public static void main(String[] args) throws IOException {
         // 서버와 연결하는 코드
-        Socket cs = new Socket("192.168.52.1", 9000);
+        Socket cs = new Socket("192.168.0.41", 9000);
 
         // 보내는 코드
         OutputStream os = cs.getOutputStream();
@@ -15,24 +15,20 @@ public class FileClient {
         BufferedWriter bw = new BufferedWriter(output);
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("받고 싶은 파일의 이름을 입력해주세요: ");
+        System.out.print("원하시는 파일의 이름을 입력해주세요. : ");
         String msg = sc.next();
 
         bw.write(msg + "\n");
         bw.flush();
 
         // 받는 코드
-        FileOutputStream fileOutputStream = new FileOutputStream("C:\\test2\\" + msg);
-
         InputStream is = cs.getInputStream();
-        BufferedInputStream bis = new BufferedInputStream(is);
-        int data = 0;
-        while ((data = bis.read()) != -1) {
-            fileOutputStream.write(data);
-        }
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader bir = new BufferedReader(isr);
+        String data = bir.readLine();
+        System.out.println(data);
 
-        fileOutputStream.flush();
-        fileOutputStream.close();
-
+        FileInputStream fileInputStream = new FileInputStream("C:\\test2\\" + data);
+        fileInputStream.close();
     }
 }
